@@ -1,0 +1,266 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #6c757d;
+    --accent-color: #ffd333;
+    --contrast-color: #3d464d;
+    --gray-color: #ccc;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    min-width: 320px;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn,
+.dropdown-menu,
+.form-control {
+    border-radius: 0;
+}
+
+.form-control:focus {
+    color: var(--text-color);
+    border-color: var(--accent-color);
+    box-shadow: none;
+}
+
+.form-control::placeholder {
+    color: var(--gray-color);
+}
+
+.btn-warning {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+.btn-outline-warning {
+    border-color: var(--accent-color);
+}
+
+.bg-warning {
+    background-color: var(--accent-color) !important;
+}
+
+.btn-outline-warning:hover {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+}
+
+/* ============================= General rules ============================ */
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main.main {
+    flex: 1 1 auto;
+}
+
+section {
+    padding: 50px 0;
+}
+
+.section-title {
+    position: relative;
+    text-transform: uppercase;
+    color: var(--contrast-color);
+    font-weight: 700;
+}
+
+.section-title span {
+    background-color: var(--bg-color);
+    padding-right: 1rem;
+}
+
+.section-title::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    top: 50%;
+    left: 0;
+    border-top: 1px dashed var(--text-color);
+    z-index: -1;
+}
+
+/* ============================= General rules ============================ */
+
+/* ============================= Header ============================ */
+
+.header-top-phone a {
+    text-decoration: none;
+}
+
+.header-top-phone a:hover {
+    text-decoration: underline;
+}
+
+ul.social-icons {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+ul.social-icons li {
+    margin-right: 10px;
+}
+
+ul.social-icons a {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    float: left;
+    text-align: center;
+    transition: all .3s;
+}
+
+ul.social-icons a:hover {
+    background-color: var(--contrast-color);
+    color: var(--accent-color);
+}
+
+.header-top .btn {
+    background-color: #fff;
+}
+
+.header-logo {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    transition: all .3s;
+}
+
+.header-logo:hover {
+    color: var(--contrast-color);
+}
+
+.cart-buttons .btn {
+    color: var(--contrast-color);
+    transition: all .3s;
+}
+
+.cart-buttons .btn:hover {
+    border: 1px solid var(--contrast-color);
+}
+
+.header-bottom {
+    border-top: 3px solid var(--accent-color);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .3);
+}
+
+.header-bottom .navbar,
+.header-bottom .navbar .dropdown-menu {
+    background-color: var(--contrast-color) !important;
+}
+
+.header-bottom .nav-item:first-child .nav-link {
+    padding-left: 0;
+}
+
+.header-bottom .navbar .nav-link {
+    color: #fff;
+    transition: .3s all;
+    letter-spacing: .1rem;
+}
+
+.header-bottom .navbar .nav-link:hover {
+    color: var(--accent-color);
+}
+
+.header-bottom .navbar .nav-link.active {
+    color: var(--accent-color);
+}
+
+.header-bottom .navbar .dropdown-menu {
+    margin-top: 7px;
+}
+
+/* ============================= Header ============================ */
+
+
+/* ============================= Main ============================ */
+
+
+/* ============================= Carousel ============================ */
+.carousel-caption {
+    text-shadow: 0 0 2px rgba(0, 0, 0, 1);
+}
+
+.carousel-caption p {
+    font-size: 1.5rem;
+}
+
+/* ============================= Carousel ============================ */
+
+
+/* ============================= Advantages ============================ */
+
+.advantages .items {
+    margin-top: 50px;
+}
+
+.advantages .items .item {
+    background-color: #fff;
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all .3s;
+}
+
+.advantages .items .item:hover {
+    box-shadow: 0 15px 30px -20px rgba(0, 0, 0, .5);
+}
+
+.advantages i {
+    font-size: 70px;
+    color: var(--accent-color);
+}
+
+/* ============================= Advantages ============================ */
+
+
+
+/* ============================= Main ============================ */
+
+
+@media only screen and (min-width : 992px) {
+    .header-bottom .navbar .dropdown-menu-end {
+        margin-left: 0;
+        border: 0;
+    }
+
+    .header-bottom .navbar .nav-link {
+        padding: 1rem;
+    }
+}
+
+@media only screen and (max-width : 992px) {
+    .header-bottom .navbar .dropdown-menu {
+        padding-left: 1rem;
+    }
+}

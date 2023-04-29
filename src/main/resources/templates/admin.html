@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+</head>
+<body>
+<h1>Личный кабинет администратора</h1>
+<form method="post" th:action="@{/logout}">
+    <button type="submit">Выйти из кабинета</button>
+</form>
+<div>
+    <fieldset><legend>Работа с пользователями:</legend>
+        <table>
+            <tr><th>Логин</th><th>ID</th><th>Права</th></tr>
+            <div th:each="person : ${persons}">
+                <tr>
+                    <td th:text="${person.getLogin()}"></td>
+                    <td th:text="${person.getId()}"></td>
+                    <td th:text="${person.getRole()}"></td>
+                    <td>
+                        <form th:action="@{/admin/change_role/{id}(id=${person.getId()})}">
+                            <button type="submit" th:name="action" value="Роль">Изменить роль</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/view_order/{id}(id=${person.getId()})}">
+                            <button type="submit" th:name="action" value="Заказ">Заказы</button>
+                        </form>
+                    </td>
+                </tr>
+            </div>
+        </table>
+    </fieldset>
+    <fieldset><legend>Поиск по заказам</legend>
+        <form th:method="POST" th:action="@{/admin/view_order/search_order}">
+            <label for="search_order">Укажите последние символы заказа:</label>
+            <input type="text" th:name="search_order" th:value="${search_order}" id="search_order">
+            <input type="submit" value="Поиск">
+        </form>
+        <h4>Результат поиска:</h4>
+        <table>
+            <tr><th>Номер заказа</th><th>Статус заказа</th><th>Дата заказа</th><th>Стоимость заказа</th><th>Владелец заказа</th></tr>
+            <div th:each="ord : ${find_orders}">
+                <tr>
+                    <td th:text="${ord.getNumber()}"></td>
+                    <td th:text="${ord.getStatus()}"></td>
+                    <td th:text="${#temporals.format(ord.getDateTime(),'dd-MM-yyyy')}"></td>
+                    <td th:text="${ord.getPrice()}"></td>
+                    <td th:text="${ord.getPerson().getNameUser()}"></td>
+                </tr>
+            </div>
+        </table>
+    </fieldset>
+</div>
+<div>
+    <fieldset><legend>Работа с заказами:</legend>
+        <table>
+            <tr><th>Номер заказа</th><th>Статус заказа</th><th>Дата заказа</th><th>Стоимость заказа</th></tr>
+            <div th:each="order : ${orders}">
+                <tr>
+                    <form th:method="POST" th:action="@{/admin/view_order/{id}(id=${order.getPerson().getId()})}">
+                        <td hidden="hidden"><input type="text" readonly th:name="order_id" id="order_id" th:value="${order.getId()}" hidden="hidden"></td>
+                        <td><input type="text" readonly style="width: 250px" th:name="order_number" id="order_number" th:value="${order.getNumber()}"></td>
+                        <td>
+                            <select th:name="status">
+                                <option th:each="i : ${status}" th:value="${i}" th:text="${i}" th:selected="${i==order.getStatus()}"></option>
+                            </select>
+                        </td>
+                        <td><input type="text" readonly th:value="${#temporals.format(order.getDateTime(),'dd-MM-yyyy')}"></td>
+                        <td><input type="text" readonly th:value="${order.getPrice()}"></td>
+                        <td><input type="submit" value="Сохранить"></td>
+                    </form>
+                </tr>
+            </div>
+        </table>
+    </fieldset>
+</div>
+<fieldset><legend>Работа с товарами:</legend>
+    <a href="admin/product/add">Добавить товар</a>
+    <br><br>
+    <div th:each="product : ${products}">
+        <p th:text="'Наименование: ' + ${product.getTitle()}"></p><br>
+        <p th:text="'Описание: ' + ${product.getDescription()}"></p><br>
+        <p th:text="'Цена: ' + ${product.getPrice()}"></p><br>
+        <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p><br>
+        <p th:text="'Продавец: ' + ${product.getSeller()}"></p><br>
+        <p th:text="'Склад: ' + ${product.getWarehouse()}"></p><br>
+        <hr>
+        <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a><br>
+        <a th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a><br>
+        <hr>
+    </div>
+</fieldset>
+</body>
+</html>
